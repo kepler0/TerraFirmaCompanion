@@ -20,15 +20,10 @@ buildscript {
 
 group = 'com.k2b6s9j.terrafirmacompanion'
 
-archivesBaseName = 'TerraFirmaCompanion'
-
 minecraft {
     version = '1.7.10-10.13.1.1217'
 }
 
-repositories {
-    jcenter()
-}
-
 dependencies {
+    compile project(':TerraFirmaCraft')
 }
