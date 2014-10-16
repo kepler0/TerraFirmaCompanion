@@ -25,5 +25,8 @@ minecraft {
 }
 
 dependencies {
-    compile project(':TerraFirmaCraft')
+    compile(project(':TerraFirmaCraft')) {
+        //exclude "forgeBin:1.7.10-10.13.1.1217"
+        transitive = false
+    }
 }
