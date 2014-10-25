@@ -22,24 +22,35 @@ group = 'com.k2b6s9j.terrafirmacompanion'
 
 minecraft {
     version = '1.7.10-10.13.1.1217'
-    at 'TerraFirmaCraft/src/Resources/META-INF/tfc_at.cfg'
+    at 'lib/tfc_at.cfg'
 }
 
 repositories {
-    flatDir dirs: "${rootDir}/lib"
-    flatDir dirs: "${rootDir}/TerraFirmaCraft/build/libs"
-    mavenCentral()
+    maven {
+        name = "ic2-and-forestry"
+        url = "http://maven.ic2.player.to/"
+    }
     maven {
         name = "chickenbones"
         url = "http://chickenbones.net/maven/"
     }
+
+    flatDir dirs: "${rootDir}/lib"
 }
 
 dependencies {
-    compile name: "[1.7.10]TerraFirmaCraft-deobf", version: "0.79.7"
-    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.95:dev"
-    compile "codechicken:CodeChickenCore:1.7.10-1.0.2.9:dev"
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.2.15:dev"
+    compile fileTree(dir: 'lib', includes: ['*.jar'], excludes: ['*-src*.jar', '*.txt'])
 }
 
-build.dependsOn ':TerraFirmaCompanion:assemble'
+// Copy libs to the mods folder
+task copyChicken(type: Copy, dependsOn: "extractUserDev") {
+    from { configurations.compile }
+    include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar"
+    exclude "**/*-src*.jar" // No src jars in the mods folder
+    into file(minecraft.runDir + "/mods")
+
+    mustRunAfter "deobfBinJar"
+    mustRunAfter "repackMinecraft"
+}
+tasks.setupDevWorkspace.dependsOn copyChicken
+tasks.setupDecompWorkspace.dependsOn copyChicken

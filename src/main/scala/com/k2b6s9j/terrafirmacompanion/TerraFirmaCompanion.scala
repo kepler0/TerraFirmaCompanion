@@ -2,11 +2,19 @@ package com.k2b6s9j.terrafirmacompanion
 
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.event.{FMLPostInitializationEvent, FMLInitializationEvent, FMLPreInitializationEvent}
+import net.minecraftforge.common.config.Configuration
 import org.apache.logging.log4j.Logger
 
-@Mod(modid = "TFCompanion", name = "TerraFirmaCompanion", modLanguage = "scala", dependencies = "required-after:terrafirmacraft")
+@Mod(
+  modid = "TFCompanion",
+  name = "TerraFirmaCompanion",
+  modLanguage = "scala",
+  dependencies =
+    "required-after:terrafirmacraft;" +
+      "after:Botania")
 object TerraFirmaCompanion {
-  private var log: Logger = null
+  private[terrafirmacompanion] var log: Logger = null
+  private[terrafirmacompanion] var config: Configuration = null
 
   @Mod.EventHandler
   def preInit(event: FMLPreInitializationEvent) = {
