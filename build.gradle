@@ -22,11 +22,17 @@ group = 'com.k2b6s9j.terrafirmacompanion'
 
 minecraft {
     version = '1.7.10-10.13.1.1217'
+    at 'TerraFirmaCraft/src/Resources/META-INF/tfc_at.cfg'
+}
+
+repositories {
+    flatDir dirs: "${rootDir}/lib"
+    flatDir dirs: "${rootDir}/TerraFirmaCraft/build/libs"
+    mavenCentral()
 }
 
 dependencies {
-    compile(project(':TerraFirmaCraft')) {
-        //exclude "forgeBin:1.7.10-10.13.1.1217"
-        transitive = false
-    }
+    compile name: "[1.7.10]TerraFirmaCraft-deobf", version: "0.79.7"
 }
+
+build.dependsOn ':TerraFirmaCompanion:assemble'
