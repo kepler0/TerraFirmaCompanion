@@ -20,6 +20,7 @@ object TerraFirmaCompanion {
   def preInit(event: FMLPreInitializationEvent) = {
     log = event.getModLog
     printModInfo()
+    ModCompatibility.preInit()
   }
 
   def printModInfo() = {
@@ -30,11 +31,11 @@ object TerraFirmaCompanion {
 
   @Mod.EventHandler
   def init(event: FMLInitializationEvent) = {
-
+    ModCompatibility.init()
   }
 
   @Mod.EventHandler
   def postInit(event: FMLPostInitializationEvent) = {
-
+    ModCompatibility.postInit()
   }
 }
