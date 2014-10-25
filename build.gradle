@@ -29,10 +29,17 @@ repositories {
     flatDir dirs: "${rootDir}/lib"
     flatDir dirs: "${rootDir}/TerraFirmaCraft/build/libs"
     mavenCentral()
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven/"
+    }
 }
 
 dependencies {
     compile name: "[1.7.10]TerraFirmaCraft-deobf", version: "0.79.7"
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.95:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.2.9:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.2.15:dev"
 }
 
 build.dependsOn ':TerraFirmaCompanion:assemble'
